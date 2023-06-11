@@ -1,0 +1,8 @@
+# 얼굴인식
+pip3 install opencv-python opencv-contrib-python dlib face_recognition
+pip install -U numpy
+sudo apt-get install libcblas-dev
+sudo apt-get install libhdf5-dev
+sudo apt-get install libhdf5-serial-dev
+sudo apt-get install libatlas-base-dev
+sudo apt-get install libjasper-dev 

@@ -1,0 +1,10 @@
+# QT 가상키보드, pyqt 버전에 맞는 tag로 checkout후 build
+sudo apt-get update
+sudo apt install git build-essential
+sudo apt install python3-pyqt5 qtdeclarative5-dev libqt5svg5-dev qtbase5-private-dev qml-module-qtquick-controls2 qml-module-qtquick-controls qml-module-qt-labs-folderlistmodel
+sudo apt install '^libxcb.*-dev' libx11-xcb-dev libglu1-mesa-dev libxrender-dev libxi-dev libxkbcommon-dev libxkbcommon-x11-dev
+git clone -b 5.15.2 https://github.com/qt/qtvirtualkeyboard.git
+cd qtvirtualkeyboard
+qmake 
+sudo make
+sudo make install

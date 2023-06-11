@@ -1,0 +1,15 @@
+# pyqt 설치
+sudo apt install python3-pyqt5
+
+# 화면보호기 해제
+cmdline에 consoleblank=0
+
+# 한글폰트 - GUI에서 한글 출력하도록
+sudo apt install -y fonts-unfonts-core
+
+# SSH 암호경고 해제
+sudo rm /etc/xdg/lxsession/LXDE-pi/sshpwd.sh
+
+# 사용자 초기화 하기
+/home/pi/smartmirror/faces 내의 이미지파일 삭제
+

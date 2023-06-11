@@ -1,0 +1,16 @@
+[Unit]
+Description=DrinkingDetection GUI Service
+After=graphical.target
+
+
+[Service]
+#### wayland environment file
+Environment="DISPLAY=:0.0"
+User=pi
+WorkingDirectory=/home/pi/DrinkingDetection
+ExecStart=/usr/bin/python3 main.py
+# Restart=always
+
+[Install]
+WantedBy=bluetooth.target
+WantedBy=multi-user.target

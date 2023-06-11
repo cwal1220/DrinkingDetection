@@ -1,0 +1,3 @@
+# Push 알람을 위한 pip 패키지
+pip3 install pyfcm
+
