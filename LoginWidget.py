@@ -83,8 +83,6 @@ class LoginWorker(QThread):
 
     def initCamera(self):
         self.videoCapture = cv2.VideoCapture(0)
-        self.videoCapture.set(cv2.CAP_PROP_FRAME_WIDTH, 640) # 가로
-        self.videoCapture.set(cv2.CAP_PROP_FRAME_HEIGHT, 480) # 세로
 
     def releaseCamera(self):
         if self.videoCapture:

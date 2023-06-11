@@ -98,7 +98,7 @@ class RegisterWidget(QWidget):
     def hideEvent(self, event):
         self.registerWorker.stop()
         self.idEdit.setText('')
-        self.pw1Edit.setText('')
+        self.pwEdit.setText('')
         self.pw2Edit.setText('')
 
         self.messageLabel.setText('')
@@ -118,8 +118,6 @@ class RegisterWorker(QThread):
 
     def initCamera(self):
         self.videoCapture = cv2.VideoCapture(0)
-        self.videoCapture.set(cv2.CAP_PROP_FRAME_WIDTH, 640) # 가로
-        self.videoCapture.set(cv2.CAP_PROP_FRAME_HEIGHT, 480) # 세로
 
     def releaseCamera(self):
         if self.videoCapture:

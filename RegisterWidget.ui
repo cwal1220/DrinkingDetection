@@ -130,8 +130,14 @@ QPushButton
    </property>
    <property name="minimumSize">
     <size>
-     <width>320</width>
-     <height>240</height>
+     <width>640</width>
+     <height>480</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>640</width>
+     <height>480</height>
     </size>
    </property>
    <property name="font">
