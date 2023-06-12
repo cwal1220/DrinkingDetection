@@ -98,7 +98,7 @@ class RegisterWidget(QWidget):
     def hideEvent(self, event):
         self.registerWorker.stop()
         self.idEdit.setText('')
-        self.pwEdit.setText('')
+        self.pw1Edit.setText('')
         self.pw2Edit.setText('')
 
         self.messageLabel.setText('')
