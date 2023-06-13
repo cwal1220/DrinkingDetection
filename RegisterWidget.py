@@ -5,6 +5,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.uic import *
 import cv2
+import time
 from managers.FaceRecogManager import FaceRecogManager
 from managers.FaceRecogManager import signUpDuplicatecheck
 from managers.FaceRecogManager import signUp
@@ -92,15 +93,14 @@ class RegisterWidget(QWidget):
         self.widgetMoveSignal.emit(0)
 
     def showEvent(self, event):
-        self.registerWorker.start()
+        self.registerWorker.startRegisterWorker()
         return super().showEvent(event)
 
     def hideEvent(self, event):
-        self.registerWorker.stop()
+        self.registerWorker.stopRegisterWorker()
         self.idEdit.setText('')
         self.pw1Edit.setText('')
         self.pw2Edit.setText('')
-
         self.messageLabel.setText('')
         self.cvLabel.setPixmap(QPixmap("resources/bg.png"))
         self.cvLabel.setText('Camera Initializing.....')
@@ -124,15 +124,19 @@ class RegisterWorker(QThread):
             self.videoCapture.release()
             self.videoCapture = None
 
-    def stop(self):
+    def startRegisterWorker(self):
+        self.isThreadRunnable = True
+        self.start()
+
+    def stopRegisterWorker(self):
         self.isThreadRunnable = False
+        time.sleep(2)
 
     def run(self):
         self.initCamera()
         while self.isThreadRunnable:
             ret, cameraFrame = self.videoCapture.read()
             self.cvImageSignal.emit([cameraFrame])
-        self.isThreadRunnable = True
         self.releaseCamera()
 
 

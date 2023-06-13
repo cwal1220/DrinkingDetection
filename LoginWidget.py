@@ -6,6 +6,7 @@ from PyQt5.QtGui import *
 from PyQt5.uic import *
 import cv2
 from managers.FaceRecogManager import FaceRecogManager
+import time
 
 class LoginWidget(QWidget):
     # 위젯 인덱스를 이동할때 방출하는 Signal
@@ -59,11 +60,11 @@ class LoginWidget(QWidget):
         self.widgetMoveSignal.emit(0)
 
     def showEvent(self, event):
-        self.loginWorker.start()
+        self.loginWorker.startLoginWorker()
         return super().showEvent(event)
 
     def hideEvent(self, event):
-        self.loginWorker.stop()
+        self.loginWorker.stopLoginWorker()
         self.idEdit.setText('')
         self.pwEdit.setText('')
         self.messageLabel.setText('')
@@ -89,13 +90,17 @@ class LoginWorker(QThread):
             self.videoCapture.release()
             self.videoCapture = None
 
-    def stop(self):
+    def startLoginWorker(self):
+        self.isThreadRunnable = True
+        self.start()
+
+    def stopLoginWorker(self):
         self.isThreadRunnable = False
+        time.sleep(2)
 
     def run(self):
-        faceRecogManager = FaceRecogManager()
-        self.isThreadRunnable = True
         self.initCamera()
+        faceRecogManager = FaceRecogManager()
         faceRecogManager.updateKnownFaces()
         while self.isThreadRunnable:
             ret, cameraFrame = self.videoCapture.read()
@@ -104,8 +109,6 @@ class LoginWorker(QThread):
             if name != 'Unknown':
                 self.userInfoSignal.emit(name.split('_')[1], name.split('_')[-1])
                 break
-
-        self.isThreadRunnable = True
         self.releaseCamera()
 
 
