@@ -39,7 +39,7 @@ class HomeWidget(QWidget):
     def measureTimerSlot(self):
         if(self.measureCnt >= 1):
             self.measureTimer.stop()
-            if((sum(self.measureValues) / len(self.measureValues)) > 200):
+            if((sum(self.measureValues) / len(self.measureValues)) > 400):
                 self.resultLabel.setText("Dranked!!")
             else:
                 self.resultLabel.setText("Pass")

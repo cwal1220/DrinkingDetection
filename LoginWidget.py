@@ -96,7 +96,6 @@ class LoginWorker(QThread):
 
     def stopLoginWorker(self):
         self.isThreadRunnable = False
-        time.sleep(2)
 
     def run(self):
         self.initCamera()
