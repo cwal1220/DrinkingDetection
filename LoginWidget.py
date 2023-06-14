@@ -6,7 +6,6 @@ from PyQt5.QtGui import *
 from PyQt5.uic import *
 import cv2
 from managers.FaceRecogManager import FaceRecogManager
-import time
 
 class LoginWidget(QWidget):
     # 위젯 인덱스를 이동할때 방출하는 Signal
@@ -25,12 +24,13 @@ class LoginWidget(QWidget):
 
     @pyqtSlot(list)
     def cvImageSlot(self, imageList):
-        img = imageList[0]
-        h, w ,c = img.shape
-        qImg = QImage(img.data, w, h, w*c, QImage.Format.Format_BGR888)
-        pixmap = QPixmap.fromImage(qImg)
-        self.cvLabel.setPixmap(pixmap)
-        self.cvLabel.resize(pixmap.width(),pixmap.height())
+        if self.loginWorker.isThreadRunnable:
+            img = imageList[0]
+            h, w ,c = img.shape
+            qImg = QImage(img.data, w, h, w*c, QImage.Format.Format_BGR888)
+            pixmap = QPixmap.fromImage(qImg)
+            self.cvLabel.setPixmap(pixmap)
+            self.cvLabel.resize(pixmap.width(),pixmap.height())
 
     @pyqtSlot(str, str)
     def userInfoSlot(self, id, pw):
