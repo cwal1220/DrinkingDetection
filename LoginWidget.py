@@ -21,6 +21,8 @@ class LoginWidget(QWidget):
         self.homeButton.clicked.connect(self.homeButtonClickSlot)
         self.id = None
         self.pw = None
+        self.startLoginWorker()
+        self.stopLoginWorker()
 
     @pyqtSlot(list)
     def cvImageSlot(self, imageList):

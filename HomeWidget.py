@@ -32,14 +32,14 @@ class HomeWidget(QWidget):
 
     @pyqtSlot()
     def measureButtonClickSlot(self):
-        self.measureTimer.start(1000)
+        self.measureTimer.start(100)
         pass
 
     @pyqtSlot()
     def measureTimerSlot(self):
         if(self.measureCnt >= 1):
             self.measureTimer.stop()
-            if((sum(self.measureValues) / len(self.measureValues)) > 400):
+            if((sum(self.measureValues) / len(self.measureValues)) > 500):
                 self.resultLabel.setText("Dranked!!")
             else:
                 self.resultLabel.setText("Pass")
@@ -50,8 +50,8 @@ class HomeWidget(QWidget):
 
         else:
             self.measureValues.append(self.sensorManager.getSensorValue())
-            self.valueLabel.setText(str(sum(self.measureValues) / len(self.measureValues)))
-            self.resultLabel.setText("Measuring... {}s remained".format(10-self.measureCnt))
+            self.valueLabel.setText(str(round(sum(self.measureValues) / len(self.measureValues))))
+            self.resultLabel.setText("Measuring... {:.1f}s remained".format(10-self.measureCnt*0.1))
             self.measureCnt += 1
 
     def hideEvent(self, event):
